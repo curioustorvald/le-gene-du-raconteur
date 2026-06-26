@@ -1,0 +1,87 @@
+
+% !TEX TS-program = lualatex
+
+\documentclass[10pt, stock, openright]{memoir}
+
+\usepackage{fontspec}
+\protrudechars=8 % or \pdfprotrudechars=2 and
+\adjustspacing=8 %    \pdfadjustspacing=2 with luatex < v0.85
+\newfontfeature{Microtypography}{protrusion=default;expansion=default}
+\directlua{fonts.protrusions.setups.default.factor=0.95} % using this because the default Microtypography is too wild for PT Serif
+\setmainfont[Microtypography, Ligatures=TeX]{PT Serif}
+\newfontfamily\sansserif[Ligatures=TeX]{PT Sans}
+
+\usepackage{fapapersize} % part of the koTeX project, enables arbitrary paper sizes
+\usefapapersize{148mm,210mm,15mm,15mm,20mm,24mm} % A5 paper
+\usepackage{afterpage}
+\usepackage{hyperref}
+\usepackage[xcolor]{mdframed}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{anyfontsize}
+\usepackage[labelformat=empty]{caption}
+\usepackage{adjustbox}
+\usepackage{calc}
+\usepackage[fontsize=10pt,baseline=15pt,lines=32]{grid}
+\raggedbottom
+% \linespread{1.25}
+
+\newcommand\cedp{\newpage{\pagestyle{empty}\cleardoublepage}}
+\newcommand\cep{\afterpage{\pagestyle{empty}\null\newpage}}
+\newcommand\forceindent{\hskip\parindent}
+\newcommand\booktitle{Le gène du raconteur: Why We Can't Stop Making Stuff Up}
+\newcommand\booktail{}
+
+\setlength\beforechapskip{45pt}
+
+\hypersetup{
+  pdfauthor={Thorvaldur Heimskarsson},
+  pdftitle={\booktitle}
+}
+
+
+\title{%
+\textbf{%
+\fontsize{32}{32}\selectfont Le gène \\%
+\vspace{7pt}%
+{\fontspec{PT Serif Caption}\fontsize{18}{18}\selectfont du \\}%
+\vspace{-2pt}%
+\fontsize{26}{26}\selectfont raconteur}\fontsize{23}{23}\selectfont : \\%
+\vspace{0pt}%
+\textbf{%
+\fontsize{14}{32}\selectfont Why We Can't Stop \\ \vspace{-4pt}Making Stuff Up%
+}}
+\date{}
+\author{}
+
+\newcommand\printauthor{%
+  {\centering%
+    {\fontsize{12}{12}\selectfont Þórvaldur Heimskarsson} \\%
+    \vspace{32pt}
+  }%
+}
+
+%no space between pars
+\setlength\parskip{0pt}
+
+
+%% styling is on the separate file %%
+\input{makestyle}
+
+
+\begin{document}
+
+\maketitle{}
+\thispagestyle{empty}
+\vfill
+\printauthor
+
+\newpage
+
+\pagestyle{tempest}
+\openany
+\input{manuscript}
+
+%\let\clearpage\relax
+
+\end{document}

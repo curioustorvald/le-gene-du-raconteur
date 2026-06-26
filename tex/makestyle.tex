@@ -1,0 +1,45 @@
+\makeatletter
+
+
+%page numbering
+%the name of this style is "tempest"
+\makepagestyle{tempest}
+%empty the top
+\makeevenhead{tempest}{}{}{}
+\makeoddhead{tempest}{}{}{}
+%bottom left
+\makeevenfoot{tempest}{\footnotesize \thepage \quad \footnotesize \booktitle}{}{}
+%bottom right
+% \def\chaptermark#1{{\@chapapp. \  #1}{}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+%control the leftmark
+\addtopsmarks{tempest}{}{
+    \createmark{chapter}{left}{shownumber}{}{.\ }
+}
+\makeoddfoot{tempest}{}{}{\footnotesize \leftmark \quad \thepage}
+\copypagestyle{plain}{tempest} % memoir uses plain on chapter starting page for some indecipherable reasons. We alias it.
+
+% new chapter style
+\makechapterstyle{inlinechapter}{
+  \setlength{\beforechapskip}{0pt}
+  \setlength{\afterchapskip}{30pt}
+  \renewcommand{\chapnamefont}{}
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\chapnumfont}{\fontsize{16}{15}\selectfont\bfseries}
+  \renewcommand{\chaptitlefont}{\fontsize{18}{30}\selectfont\bfseries}
+  \renewcommand{\printchapternum}{%
+    \chapnumfont Chapter\ \thechapter.\\
+  }
+  \renewcommand{\afterchapternum}{}
+  \renewcommand{\printchaptertitle}[1]{%
+    \chaptitlefont~\!##1\par
+  }
+}
+
+% actually use the one we have wrote
+\chapterstyle{inlinechapter}
+
+
+
+\makeatother
