@@ -1,0 +1,89 @@
+
+% !TEX TS-program = lualatex
+
+\documentclass[9.5pt, stock, openright]{memoir}
+
+\usepackage{fontspec}
+\protrudechars=8 % or \pdfprotrudechars=2 and
+\adjustspacing=8 %    \pdfadjustspacing=2 with luatex < v0.85
+\newfontfeature{Microtypography}{protrusion=default;expansion=default}
+\directlua{fonts.protrusions.setups.default.factor=0.95} % using this because the default Microtypography is too wild for PT Serif
+\setmainfont[Microtypography, Ligatures=TeX]{MaruBuriOTF}
+\newfontfamily\sansserif[Ligatures=TeX]{Pretendard}
+\newfontfamily\hangulfonttt{PT Mono}
+
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=modern]{korean}
+
+\usepackage{fapapersize} % part of the koTeX project, enables arbitrary paper sizes
+\usefapapersize{148mm,210mm,15mm,15mm,20mm,24mm} % A5 paper
+\usepackage{afterpage}
+\usepackage{hyperref}
+\usepackage[xcolor]{mdframed}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{anyfontsize}
+\usepackage[labelformat=empty]{caption}
+\usepackage{adjustbox}
+\usepackage{calc}
+\usepackage[fontsize=9.5pt,baseline=16.5pt,lines=29]{grid}
+\raggedbottom
+% \linespread{1.25}
+
+\newcommand\cedp{\newpage{\pagestyle{empty}\cleardoublepage}}
+\newcommand\cep{\afterpage{\pagestyle{empty}\null\newpage}}
+\newcommand\forceindent{\hskip\parindent}
+\newcommand\booktitle{이야기꾼의 유전자: 우리는 왜 이야기 짓기를 멈추지 못하는가}
+\newcommand\booktail{}
+
+\setlength\beforechapskip{45pt}
+
+\hypersetup{
+  pdfauthor={소르발뒤르 헤임스카르손},
+  pdftitle={\booktitle}
+}
+
+
+\title{%
+\textbf{%
+\fontsize{26}{40}\selectfont 이야기꾼의 \\%
+\vspace{6pt}%
+\fontsize{32}{40}\selectfont 유전자}\\%
+\vspace{18pt}%
+\textbf{%
+\fontsize{14}{22}\selectfont 우리는 왜 이야기 짓기를 \\ \vspace{2pt} 멈추지 못하는가%
+}}
+\date{}
+\author{}
+
+\newcommand\printauthor{%
+  {\centering%
+    {\fontsize{12}{12}\selectfont 소르발뒤르 헤임스카르손} \\%
+    \vspace{32pt}
+  }%
+}
+
+%no space between pars
+\setlength\parskip{0pt}
+
+
+%% styling is on the separate file %%
+\input{makestyle}
+
+
+\begin{document}
+
+\maketitle{}
+\thispagestyle{empty}
+\vfill
+\printauthor
+
+\newpage
+
+\pagestyle{tempest}
+\openany
+\input{manuscript}
+
+%\let\clearpage\relax
+
+\end{document}
